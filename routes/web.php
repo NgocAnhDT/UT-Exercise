@@ -11,6 +11,10 @@
 |
 */
 
+use App\Http\Controllers\WithdrawController;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/ex1', [WithdrawController::class, 'withdraw']);
