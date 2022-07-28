@@ -2,28 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use App\Services\WithdrawService;
 use Illuminate\Http\Request;
 
 class WithdrawController extends Controller
 {
+    protected $withdrawService;
+
+    public function __construct(WithdrawService $withdrawService)
+    {
+        $this->withdrawService = $withdrawService;
+    }
+
     public function withdraw(Request $request)
     {
-        $now = Carbon::now();
-        if ($request->isVip == 1) {
-            $fee = 0;
-        } else {
-            if (in_array($now->format('l'), ['Saturday','Sunday'])) {
-                $fee = 110;
-            } else {
-                if ($now->gte(Carbon::parse('8:45')) && $now->lt(Carbon::parse('18:00'))) {
-                    $fee = 0;
-                } else {
-                    $fee = 110;
-                }
-            }
-        }
+        $fee = $this->withdrawService->withdraw($request);
 
-        return view('index', compact('now', 'fee'));
+        return view('index', compact('fee'));
     }
 }
