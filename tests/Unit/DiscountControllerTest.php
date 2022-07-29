@@ -32,6 +32,8 @@ class DiscountControllerTest extends TestCase
     {
         $request = new Request([
             'quantity' => '3.14',
+            'hasWshirt' => 'false',
+            'hasTie' => 'false',
         ]);
         $view = $this->controller->totalBill($request);
         $this->assertEquals('bill', $view->getName());
@@ -42,6 +44,8 @@ class DiscountControllerTest extends TestCase
     {
         $request = new Request([
             'quantity' => '7',
+            'hasWshirt' => 'false',
+            'hasTie' => 'false',
         ]);
         $discount = 7;
         $this->serviceMock->shouldReceive('discountBill')->andReturn($discount);

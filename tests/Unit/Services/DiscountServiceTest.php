@@ -25,7 +25,9 @@ class DiscountServiceTest extends TestCase
     public function test_discount_bill_function_with_quantity_less_than_7_and_has_not_wshirt_and_tie()
     {
         $request = new Request([
-            'quantity' => rand(0, 6),
+            'quantity' => '5',
+            'hasWshirt' => 'false',
+            'hasTie' => 'false',
         ]);
         $result =  $this->service->discountBill($request);
         $this->assertEquals(0, $result);
@@ -35,6 +37,8 @@ class DiscountServiceTest extends TestCase
     {
         $request = new Request([
             'quantity' => '7',
+            'hasWshirt' => 'false',
+            'hasTie' => 'false',
         ]);
         $result =  $this->service->discountBill($request);
         $this->assertEquals(7, $result);
@@ -44,6 +48,8 @@ class DiscountServiceTest extends TestCase
     {
         $request = new Request([
             'quantity' => '8',
+            'hasWshirt' => 'false',
+            'hasTie' => 'true',
         ]);
         $result =  $this->service->discountBill($request);
         $this->assertEquals(7, $result);
@@ -53,6 +59,8 @@ class DiscountServiceTest extends TestCase
     {
         $request = new Request([
             'quantity' => '8',
+            'hasWshirt' => 'true',
+            'hasTie' => 'false',
         ]);
         $result =  $this->service->discountBill($request);
         $this->assertEquals(7, $result);
@@ -62,8 +70,8 @@ class DiscountServiceTest extends TestCase
     {
         $request = new Request([
             'quantity' => '8',
-            'hasWshirt' => '1',
-            'hasTie' => '1',
+            'hasWshirt' => 'true',
+            'hasTie' => 'true',
         ]);
         $result =  $this->service->discountBill($request);
         $this->assertEquals(12, $result);
@@ -73,8 +81,8 @@ class DiscountServiceTest extends TestCase
     {
         $request = new Request([
             'quantity' => '5',
-            'hasWshirt' => '1',
-            'hasTie' => '1',
+            'hasWshirt' => 'true',
+            'hasTie' => 'true',
         ]);
         $result =  $this->service->discountBill($request);
         $this->assertEquals(5, $result);

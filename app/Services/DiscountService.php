@@ -11,7 +11,8 @@ class DiscountService
         if ($request->quantity >= 7) {
             $discount += 7;
         }
-        if ($request->hasWshirt != 0 && $request->hasTie != 0) {
+        if (filter_var($request->hasWshirt, FILTER_VALIDATE_BOOLEAN) == true 
+            && filter_var($request->hasTie, FILTER_VALIDATE_BOOLEAN) == true) {
             $discount += 5;
         }
         
