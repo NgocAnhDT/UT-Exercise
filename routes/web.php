@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\WithdrawController;
 
 Route::get('/', function () {
@@ -18,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/ex1', [WithdrawController::class, 'withdraw']);
+Route::get('/ex2', [DiscountController::class, 'totalBill']);
